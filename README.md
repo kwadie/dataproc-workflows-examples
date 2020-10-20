@@ -20,6 +20,7 @@ This is a proof of concept to facilitate Hadoop/Spark workloads migrations to GC
 * Usage of [spark-bigquery-connector](https://github.com/GoogleCloudDataproc/spark-bigquery-connector) to read and write from/to BigQuery.
 * Usage of [Dataproc workflow templates](https://cloud.google.com/dataproc/docs/concepts/workflows/overview) to run jobs on ephemeral clusters
 * Usage of [Cloud Scheduler](https://cloud.google.com/scheduler/docs) to trigger the these workflows on regular basis (i.e. CRON)
+* Usage of `gcloud dataproc workflow-templates` and `curl` commands to trigger these workflows on demand.
 
 The POC could be configured to use your own job(s) and to estimate GCP cost for such a workload over a period of time. (hint: use resource labels as defined in the workflow template YAML files to track cost) 
 
@@ -148,6 +149,8 @@ bigquery_table_schema_output.json
 ```
 
 * In Cloud Scheduler console, confirm the last execution status of the job
+
+* Other options to execute the workflow directly without cloud scheduler are [run_workflow_gcloud.sh](run_workflow_gcloud.sh) and [run_workflow_http_curl.sh](run_workflow_http_curl.sh)
 
 
 
