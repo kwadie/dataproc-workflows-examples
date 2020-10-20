@@ -1,4 +1,4 @@
-# Running Spark on GCP - POC
+# Dataproc workflows examples
 
 ## Copyright
 Copyright (C) 2020 Google Inc.
