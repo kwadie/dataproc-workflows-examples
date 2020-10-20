@@ -1,0 +1,53 @@
+# Copyright (C) 2020 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
+
+# Example for a parameterized Dataproc Workflow template that uses a cluster selector
+
+labels:
+  application: dataproc-workflow-spark-poc # Template labels are applied to Jobs and Managed Clusters
+jobs:
+- pysparkJob:
+    jarFileUris:
+    - gs://spark-lib/bigquery/spark-bigquery-latest.jar # use "-latest_2.12.jar" for image version 1.5
+    args:
+    - input_table_parameter
+    - output_table_parameter
+    - temp_gcs_bucket_parameter
+    mainPythonFileUri: main_python_file_parameter
+  stepId: pyspark-demo
+placement:
+  clusterSelector:
+    clusterLabels:
+      goog-dataproc-cluster-name: 'cluster_name_parameter'
+parameters:
+- name: CLUSTER
+  fields:
+  - placement.clusterSelector.clusterLabels['goog-dataproc-cluster-name']
+- name: MAIN_PYTHON_FILE 
+  description: Python script to run
+  fields:
+  - jobs['pyspark-demo'].pysparkJob.mainPythonFileUri
+- name: INPUT_TABLE
+  description: BigQuery input table
+  fields:
+  - jobs['pyspark-demo'].pysparkJob.args[0]
+- name: OUTPUT_TABLE
+  description: BigQuery output table
+  fields:
+  - jobs['pyspark-demo'].pysparkJob.args[1]
+- name: TEMP_GCS_BUCKET
+  description: Temp GCS bucket name
+  fields:
+  - jobs['pyspark-demo'].pysparkJob.args[2]
+  

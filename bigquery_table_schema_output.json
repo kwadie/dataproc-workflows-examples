@@ -1,0 +1,23 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "title",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "wiki",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "views",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "datehour",
+    "type": "TIMESTAMP"
+  }
+]
+
